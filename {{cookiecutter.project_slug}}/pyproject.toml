@@ -9,7 +9,7 @@ build-backend = "hatchling.build"
 
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/{{ cookiecutter.project_slug }}"]
+packages = ["src/{{ cookiecutter.package_name }}"]
 
 [dependency-groups]
 dev = [
@@ -24,7 +24,7 @@ dev = [
 
 [tool.ruff]
 line-length = 88
-target-version = "py312"
+target-version = "{{ cookiecutter.ruff_target_version }}"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
@@ -36,22 +36,6 @@ quote-style = "double"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-
-
-
-
-
-[tool.ruff]
-line-length = 88
-target-version = "py312"
-
-[tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
-
-[tool.ruff.format]
-quote-style = "double"
-
-
 
 [tool.pylint.messages_control]
 disable = [
