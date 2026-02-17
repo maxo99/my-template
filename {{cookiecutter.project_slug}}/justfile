@@ -1,0 +1,9 @@
+# justfile
+
+# List available commands
+default:
+    just --list
+
+# Bump version
+release-local:
+	uv run semantic-release version

@@ -1,6 +1,8 @@
 [project]
 name = "{{ cookiecutter.project_slug }}"
 version = "0.1.0"
+description = ""
+readme = "README.md"
 requires-python = ">={{ cookiecutter.python_version }}"
 
 [build-system]
@@ -14,6 +16,7 @@ packages = ["src/{{ cookiecutter.package_name }}"]
 [dependency-groups]
 dev = [
     "pytest>=7.0.0",
+    "python-semantic-release>=9.0.0",
 {% if cookiecutter.use_pyright %}
   "pyright>=1.1.0",
 {% endif %}
@@ -36,6 +39,18 @@ quote-style = "double"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+version_variables = ["src/{{ cookiecutter.package_name }}/__init__.py:__version__"]
+branch = "main"
+tag_format = "v{version}"
+major_on_zero = false
+allow_zero_version = true
+upload_to_pypi = false
+upload_to_release = false
+upload_to_vcs_release = false
+build_command = "uv build"
 
 [tool.pylint.messages_control]
 disable = [
@@ -76,20 +91,21 @@ max-locals = 20
 max-returns = 6
 max-branches = 12
 
+{% if cookiecutter.use_pyright %}
 [tool.pyright]
 include = ["src"]
 exclude = [
-    "outputs/",
-    "doc",
-    "**/node_modules",
-    "**/cdk.out",
-    "**/.pytest_cache",
-    "**/build",
-    "**/dist",
-    "**/.vscode",
-    "**/__pycache__",
-    "**/*.egg-info",
-    "**/*.ruff_cache",
-
+  "outputs/",
+  "doc",
+  "**/node_modules",
+  "**/cdk.out",
+  "**/.pytest_cache",
+  "**/build",
+  "**/dist",
+  "**/.vscode",
+  "**/__pycache__",
+  "**/*.egg-info",
+  "**/*.ruff_cache",
 ]
+{% endif %}
 
