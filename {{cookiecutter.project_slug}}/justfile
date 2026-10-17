@@ -1,5 +1,7 @@
 # justfile
 
+TIMESTAMP := `date -u +%Y%m%dT%H%M%SZ`
+
 # List available commands
 default:
     just --list
